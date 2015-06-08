@@ -1,0 +1,22 @@
+/**
+ * 我们定义的app.js 入口
+ */
+Ext.onReady(function(){
+	//调用application 
+	Ext.application({
+		//app的名称
+		name:"core",
+		//作用域
+		scope:this,
+		//应用根目录
+		appFolder:"core/coreApp",
+		//当前页面加载完成的执行函数
+		launch:function(){
+		},
+		//装在控制器
+		controllers:[
+			//我们的控制器
+			"core.app.controller.MainController"
+		]
+	});
+});

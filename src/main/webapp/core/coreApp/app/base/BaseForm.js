@@ -1,0 +1,28 @@
+/**
+ * 表格对象
+ */
+Ext.define("core.app.base.BaseForm",{
+	//继承了表格对性爱那个
+	extend:"Ext.form.Panel",
+	//别名
+	alias:"widget.baseform",
+	//渲染
+	frame:true,
+	//布局
+	layout:{
+		//盒式布局
+		type:"vbox",
+		align:"center"
+	},
+	//默认数据类型
+	defaults:{
+		xtype:"textfield",
+		//按照比例来算
+		columnWidth:.4
+	},
+	//工具栏
+	tbar:[
+		{xtype:"button",text:"保存",ref:"formSave",iconCls:"table_save"},
+		{xtype:"button",text:"返回",ref:"formReturn",iconCls:"return"}
+		]
+});

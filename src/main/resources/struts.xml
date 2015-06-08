@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 设定action的后缀名， 多个参数的时候，可以用逗号隔开 -->
+	<constant name="struts.action.extension" value="do,action,"/>
+	<!-- 设定上传大小  10MB-->
+	<constant name="struts.multipart.maxSize" value="10485760"/>
+	<!-- 设定我们的动态调用为false -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+	<!-- 设定struts为Spring托管 -->
+	<constant name="struts.objectFactory" value="org.apache.struts2.spring.StrutsSpringObjectFactory"/>
+	
+    <package name="default" namespace="/" extends="struts-default">
+		<!-- 配置全局异常 -->
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="com.yellowcong.exception.DepartmentException"></exception-mapping>
+		</global-exception-mappings>
+		<!--注意这里的访问方式 是 user_xx-->
+		<!-- 其中由于我们的Class给Spring管理，所以class 不用写全名了
+			                 *_*   代表的是  
+			      调用的domain对象名称_调用的Action 中的方法
+		 -->
+		<action name="*_*" class="{1}Action" method="{2}">
+			<result>/WEB-INF/jsp/{1}/{2}.jsp</result>
+			<!-- 跳转到添加的页面 -->
+			<result name="input">/WEB-INF/jsp/{1}/{2}Input.jsp</result>
+			<!-- 获取从Action 中传递过来的url 地址-->
+			<result type="redirect" name="redirect">${url}</result>
+		</action>
+	</package>
+</struts>
